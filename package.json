@@ -4,7 +4,7 @@
   "description": "Turn desktop activity into playful literary letters.",
   "type": "module",
   "bin": {
-    "emo": "./bin/emo.js"
+    "emo": "bin/emo.js"
   },
   "files": [
     "bin",
