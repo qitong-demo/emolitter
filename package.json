@@ -1,0 +1,34 @@
+{
+  "name": "emolitter",
+  "version": "0.2.0",
+  "description": "Turn desktop activity into playful literary letters.",
+  "type": "module",
+  "bin": {
+    "emo": "./bin/emo.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node ./bin/emo.js",
+    "check": "node ./bin/emo.js --help"
+  },
+  "keywords": [
+    "cli",
+    "emo",
+    "letter",
+    "desktop",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "get-windows": "^9.3.0",
+    "node-global-key-listener": "^0.3.0"
+  }
+}
