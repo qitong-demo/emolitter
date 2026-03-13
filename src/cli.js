@@ -43,7 +43,7 @@ import {
 import {createShowcaseBundle} from "./showcase.js";
 import {describeConfig, readConfigSync, resetConfig, updateConfig} from "./config.js";
 import {describeHistoryItem, loadHistorySync} from "./history.js";
-import {createMenuInterface, pauseMenu, promptHotkey, promptInput, promptSelect, promptYesNo} from "./menu.js";
+import {createMenuInterface, pauseMenu, promptInput, promptSelect, promptYesNo} from "./menu.js";
 import {configFile as configPath, desktopDir, historyFile as historyPath, stateDir} from "./paths.js";
 import {
   drawBox,
@@ -54,6 +54,7 @@ import {
   renderHistoryCard,
   renderLetterSummaryCard,
   renderPrivacyBoard,
+  renderSelectionMenu,
   renderSettingsCard,
   tint,
   typewriter
@@ -63,10 +64,11 @@ const appVersion = "0.5.1";
 const stopWaitMs = 15_000;
 
 function printHelp() {
-  console.log(`emo - 把你的桌面日常写成一封能读下去的信
+  console.log(`emo / emoletter - 把你的桌面日常写成一封能读下去的信
 
 用法:
   emo                         进入中文菜单
+  emoletter                   进入中文菜单
   emo open [--to 收信人] [--kind someone|self|future] [--voice gentle|cinematic|minimal] [--length short|standard|long] [--html] [--outdir 目录]
   emo close [--stdout] [--html]
   emo status
@@ -474,6 +476,10 @@ function renderMenuScreen() {
   ].join("\n");
 }
 
+function renderMenuFrame(selectionMenu) {
+  return [renderMenuScreen(), "", selectionMenu].join("\n");
+}
+
 async function menuStartRecording(rl) {
   const config = readConfigSync();
   const recipient = await promptInput(rl, "收信人", config.recipient);
@@ -596,18 +602,26 @@ async function menuShowcase(rl) {
 async function menuSettings(rl) {
   let done = false;
   while (!done) {
-    console.log(renderSettingsCard(describeConfig().split("\n")));
-    const action = await promptHotkey(rl, "笔墨设置：", [
-      {key: "R", label: "收信人", value: "recipient"},
-      {key: "K", label: "收信对象类型", value: "kind"},
-      {key: "V", label: "默认风格", value: "voice"},
-      {key: "L", label: "默认篇幅", value: "length"},
-      {key: "T", label: "默认主题", value: "theme"},
-      {key: "O", label: "输出目录", value: "outdir"},
-      {key: "H", label: "HTML 默认开关", value: "html"},
-      {key: "X", label: "恢复初始值", value: "reset"},
-      {key: "B", label: "返回", value: "back"}
-    ]);
+    const action = await promptSelect(rl, "笔墨设置", [
+      {label: "修改默认收信人", detail: "给下一封信换个名字", value: "recipient"},
+      {label: "修改收信对象类型", detail: "自己 / 某个人 / 未来", value: "kind"},
+      {label: "修改默认风格", detail: "温柔 / 电影感 / 克制", value: "voice"},
+      {label: "修改默认篇幅", detail: "短笺 / 标准 / 长信", value: "length"},
+      {label: "修改默认主题", detail: "演示样张的默认场景", value: "theme"},
+      {label: "修改输出目录", detail: "改变信纸落下的位置", value: "outdir"},
+      {label: "切换 HTML 默认开关", detail: "自动导出展示页", value: "html"},
+      {label: "恢复初始值", detail: "把笔墨还原成最初的样子", value: "reset"},
+      {label: "返回上一级", detail: "", value: "back"}
+    ], {
+      renderScreen: (selectionMenu) => [
+        renderMenuScreen(),
+        "",
+        renderSettingsCard(describeConfig().split("\n")),
+        "",
+        selectionMenu
+      ].join("\n"),
+      escapeValue: "back"
+    });
 
     const current = readConfigSync();
     if (action === "recipient") {
@@ -653,13 +667,16 @@ async function menuSettings(rl) {
 }
 
 async function menuClear(rl) {
-  const action = await promptHotkey(rl, "要清理什么：", [
-    {key: "R", label: "只清理运行时数据", value: "runtime"},
-    {key: "H", label: "运行时数据 + 历史记录", value: "history"},
-    {key: "C", label: "运行时数据 + 默认配置", value: "config"},
-    {key: "A", label: "全部清理", value: "all"},
-    {key: "B", label: "返回", value: "back"}
-  ]);
+  const action = await promptSelect(rl, "清理数据", [
+    {label: "只清理运行时数据", detail: "保留历史与默认设置", value: "runtime"},
+    {label: "运行时数据 + 历史记录", detail: "忘掉已经写过的信", value: "history"},
+    {label: "运行时数据 + 默认配置", detail: "回到未设定的状态", value: "config"},
+    {label: "全部清理", detail: "把这一切都收回空白页", value: "all"},
+    {label: "返回上一级", detail: "", value: "back"}
+  ], {
+    renderScreen: renderMenuFrame,
+    escapeValue: "back"
+  });
 
   if (action === "runtime") {
     await clearCommand([]);
@@ -681,24 +698,27 @@ async function launchMenu() {
 
     let shouldExit = false;
     while (!shouldExit) {
-      console.clear();
-      console.log(renderMenuScreen());
-      console.log("");
-      const module = await promptHotkey(rl, "请选择模块：", [
-        {key: "R", label: "Record 书写 / 封存 / 样张", value: "record"},
-        {key: "V", label: "View 状态 / 历史 / 展示 / 隐私", value: "view"},
-        {key: "S", label: "Settings 默认设置 / 清理", value: "settings"},
-        {key: "Q", label: "Quit 退出", value: "quit"}
-      ], {showOptions: false});
+      const module = await promptSelect(rl, "今晚想做什么", [
+        {label: "开始记录今天", detail: "在后台替你收集这一整天", value: "record"},
+        {label: "查看与回顾", detail: "状态 / 历史 / 展示 / 隐私", value: "view"},
+        {label: "调整默认设置", detail: "笔墨风格、篇幅和输出位置", value: "settings"},
+        {label: "离开", detail: "让这封信先在心里停一会儿", value: "quit"}
+      ], {
+        renderScreen: renderMenuFrame,
+        escapeValue: "quit"
+      });
 
       console.log("");
       if (module === "record") {
-        const action = await promptHotkey(rl, "Record：", [
-          {key: "O", label: "✉️ 开始书写今日", value: "open"},
-          {key: "C", label: "🕯️ 结束并封存此刻", value: "close"},
-          {key: "M", label: "🧪 生成演示样张", value: "sample"},
-          {key: "B", label: "返回", value: "back"}
-        ]);
+        const action = await promptSelect(rl, "Record", [
+          {label: "✉️  开始书写今日", detail: "在后台安静记下今天的轮廓", value: "open"},
+          {label: "🕯️  结束并封存此刻", detail: "把今天折成一封信", value: "close"},
+          {label: "🧪  生成演示样张", detail: "不开监听也能先看成品", value: "sample"},
+          {label: "返回上一层", detail: "", value: "back"}
+        ], {
+          renderScreen: renderMenuFrame,
+          escapeValue: "back"
+        });
         if (action === "open") {
           await menuStartRecording(rl);
         } else if (action === "close") {
@@ -707,13 +727,16 @@ async function launchMenu() {
           await menuGenerateSample(rl);
         }
       } else if (module === "view") {
-        const action = await promptHotkey(rl, "View：", [
-          {key: "S", label: "🪟 查看当前状态", value: "status"},
-          {key: "H", label: "📜 翻阅往事", value: "history"},
-          {key: "K", label: "🖼️ 导出展示素材包", value: "showcase"},
-          {key: "P", label: "🔐 隐私说明", value: "privacy"},
-          {key: "B", label: "返回", value: "back"}
-        ]);
+        const action = await promptSelect(rl, "View", [
+          {label: "🪟  查看当前状态", detail: "看看今天的情绪空气", value: "status"},
+          {label: "📜  翻阅往事", detail: "最近写过的信都在这里", value: "history"},
+          {label: "🖼️  导出展示素材包", detail: "适合截图、发帖和录 GIF", value: "showcase"},
+          {label: "🔐  隐私说明", detail: "看看它究竟记了什么", value: "privacy"},
+          {label: "返回上一层", detail: "", value: "back"}
+        ], {
+          renderScreen: renderMenuFrame,
+          escapeValue: "back"
+        });
         if (action === "status") {
           await statusCommand();
         } else if (action === "history") {
@@ -724,11 +747,14 @@ async function launchMenu() {
           await privacyCommand();
         }
       } else if (module === "settings") {
-        const action = await promptHotkey(rl, "Settings：", [
-          {key: "E", label: "⚙️ 笔墨设置", value: "settings"},
-          {key: "C", label: "🧹 清理数据", value: "clear"},
-          {key: "B", label: "返回", value: "back"}
-        ]);
+        const action = await promptSelect(rl, "Settings", [
+          {label: "⚙️  笔墨设置", detail: "调整默认收信人、风格、篇幅", value: "settings"},
+          {label: "🧹  清理数据", detail: "把运行痕迹或旧记录收走", value: "clear"},
+          {label: "返回上一层", detail: "", value: "back"}
+        ], {
+          renderScreen: renderMenuFrame,
+          escapeValue: "back"
+        });
         if (action === "settings") {
           await menuSettings(rl);
         } else if (action === "clear") {

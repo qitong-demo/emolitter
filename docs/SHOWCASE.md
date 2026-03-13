@@ -1,6 +1,6 @@
 # Showcase Kit
 
-这份文档是给 `emolitter` 的展示、截图、录屏和社交传播准备的。
+这份文档是给 `emoletter` 的展示、截图、录屏和社交传播准备的。
 
 目标不是介绍所有技术细节, 而是让别人一眼明白:
 
@@ -26,7 +26,7 @@ Not a time tracker. A letter from your digital day.
 
 ### 版本 A
 
-`emolitter` 是一个 local-first 的创意 CLI。它监听键盘与窗口切换, 但最后交付的不是报表, 而是一封带情绪、带停顿、带叙述感的桌面来信。
+`emoletter` 是一个 local-first 的创意 CLI。它监听键盘与窗口切换, 但最后交付的不是报表, 而是一封带情绪、带停顿、带叙述感的桌面来信。
 
 ### 版本 B
 
@@ -148,7 +148,7 @@ emo showcase --to "小王" --kind someone --length standard --theme midnight
 ### 14-20 秒
 
 - 画面: 停在最漂亮的三四句
-- 收尾文案: `emolitter / open source / local-first`
+- 收尾文案: `emoletter / open source / local-first`
 
 ## 社交文案候选
 
@@ -160,11 +160,11 @@ emo showcase --to "小王" --kind someone --length standard --theme midnight
 
 窗口切换、键盘敲击、深夜里犹豫了一下又删掉的话, 最后都会被整理成一段像样的文字。
 
-它叫 `emolitter`。
+它叫 `emoletter`。
 
 ### 英文短文案
 
-Built a small CLI called `emolitter`.
+Built a small CLI called `emoletter`.
 
 It watches a slice of your desktop activity and turns it into a literary letter instead of an analytics report.
 

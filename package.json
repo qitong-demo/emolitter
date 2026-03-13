@@ -1,10 +1,11 @@
 {
-  "name": "emolitter",
+  "name": "emoletter",
   "version": "0.5.1",
   "description": "A local-first creative CLI with a Chinese menu that turns desktop activity into literary letters.",
   "type": "module",
   "bin": {
-    "emo": "bin/emo.js"
+    "emo": "bin/emo.js",
+    "emoletter": "bin/emo.js"
   },
   "files": [
     "bin",

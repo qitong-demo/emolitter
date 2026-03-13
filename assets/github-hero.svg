@@ -38,7 +38,7 @@
     <path d="M258 310H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
     <path d="M258 358H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
     <path d="M258 406H714" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
-    <text x="262" y="208" fill="#6F4636" font-size="22" font-family="'Georgia', 'Times New Roman', serif" letter-spacing="2">emolitter</text>
+    <text x="262" y="208" fill="#6F4636" font-size="22" font-family="'Georgia', 'Times New Roman', serif" letter-spacing="2">emoletter</text>
     <text x="262" y="288" fill="url(#ink)" font-size="52" font-family="'Georgia', 'Times New Roman', serif" font-weight="700">
       <tspan x="262" dy="0">把你一天的桌面日常</tspan>
       <tspan x="262" dy="68">写成一封真正能读下去的信</tspan>

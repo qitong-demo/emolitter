@@ -4,7 +4,7 @@
 
 ## 目标
 
-让第一次看到 `emolitter` 的人, 在 10 秒内理解:
+让第一次看到 `emoletter` 的人, 在 10 秒内理解:
 
 - 这不是时间追踪器
 - 它会生成一封真正能读的信
@@ -68,7 +68,7 @@
 ### 镜头 5 / 10-12 秒
 
 - 画面: 最后一段 + `此致 敬礼`
-- 画面文案: `emolitter / open source / local-first`
+- 画面文案: `emoletter / open source / local-first`
 
 ## 录制建议
 

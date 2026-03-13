@@ -12,13 +12,13 @@
 
 ### 中文
 
-`emolitter` 是一个 local-first 的创意 CLI。
+`emoletter` 是一个 local-first 的创意 CLI。
 
 它会把你在电脑前的一段日常动作整理成一封真正能读下去的信, 不是报表, 不是时间追踪图, 而是一份带情绪和叙述感的桌面来信。现在它还有中文菜单、默认配置、历史记录和 HTML 展示页。
 
 ### English
 
-`emolitter` is a local-first creative CLI that turns slices of desktop activity into literary letters.
+`emoletter` is a local-first creative CLI that turns slices of desktop activity into literary letters.
 
 It doesn't give you analytics dashboards. It gives you a readable, slightly sentimental letter from your digital day.
 
@@ -26,7 +26,7 @@ It doesn't give you analytics dashboards. It gives you a readable, slightly sent
 
 ### Version 1
 
-Built a small CLI called `emolitter`.
+Built a small CLI called `emoletter`.
 
 It watches a slice of your desktop activity and turns it into a literary letter instead of an analytics report.
 
@@ -38,7 +38,7 @@ I didn't want to make another productivity tracker.
 
 So I built a tool that turns ordinary desktop activity into a letter.
 
-It's called `emolitter`.
+It's called `emoletter`.
 
 ### Version 3
 
@@ -58,7 +58,7 @@ A letter from your digital day.
 
 窗口切换、键盘敲击、深夜里改了又删的句子, 最后都会被整理成一段真正能读下去的文字。
 
-它叫 `emolitter`。
+它叫 `emoletter`。
 
 ### 版本 2
 
@@ -68,7 +68,7 @@ A letter from your digital day.
 - 普通的电脑日常其实也有情绪
 - 工具不一定非得提高效率, 也可以只是好看、好玩、好记
 
-那你可能会喜欢这个我做的小项目: `emolitter`
+那你可能会喜欢这个我做的小项目: `emoletter`
 
 ## B 站 / 视频简介
 
@@ -77,13 +77,13 @@ A letter from your digital day.
 它会把我的桌面日常写成一封信:
 不是时间追踪工具, 不是统计报表, 而是一个更像作品的数字来信生成器。
 
-项目名: `emolitter`
+项目名: `emoletter`
 
 ## Release 文案
 
 ### v0.3.0
 
-`emolitter v0.3.0` 把项目从一个“有趣命令行监听器”往更完整的创意工具推进了一步。
+`emoletter v0.5.0` 把项目从一个“有趣命令行监听器”往更完整的创意工具推进了一步。
 
 这次更新加入了:
 

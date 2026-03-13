@@ -1,7 +1,7 @@
 import os from "node:os";
 import path from "node:path";
 
-export const stateDir = path.join(os.homedir(), ".emolitter");
+export const stateDir = path.join(os.homedir(), ".emoletter");
 export const pidFile = path.join(stateDir, "listener.pid");
 export const stopFile = path.join(stateDir, "stop.signal");
 export const sessionFile = path.join(stateDir, "session.json");

@@ -40,7 +40,8 @@ function isIgnoredWindow(currentWindow) {
     (value) =>
       value.includes("winkeyserver") ||
       value.includes("node-global-key-listener") ||
-      value.includes("\\emolitter\\")
+      value.includes("\\emolitter\\") ||
+      value.includes("\\emoletter\\")
   );
 }
 

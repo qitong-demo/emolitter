@@ -162,11 +162,11 @@ function describeRecentFlow({isRunning, lastEvent, lastHistoryItem}) {
   return "正静候下一阵风和下一封信";
 }
 
-export function renderBrandHeader(version = "0.5.0") {
+export function renderBrandHeader(version = "0.5.1") {
   const art = [
     tint("      .      .     .", palette.mist),
     tint("  .      ___________      .", palette.mist),
-    `${tint("      /           /|", palette.cream)}   ${emphasize(tint("emoLitter", palette.sage))}`,
+    `${tint("      /           /|", palette.cream)}   ${emphasize(tint("emoletter", palette.sage))}`,
     `${tint("     /___________/ |", palette.cream)}   ${tint("写给未来的信", palette.lavender)}`,
     `${tint("     |           | /", palette.cream)}   ${tint(`v${version}`, palette.amber)}`,
     tint("     |___________|/", palette.cream)
@@ -179,21 +179,26 @@ export function renderDashboard({config, session, isRunning, eventCount, lastEve
   const current = session ?? config;
   const air = describeAir(eventCount, isRunning);
 
-  return [
-    drawBox("情绪仪表盘", [
-      `默认收信人  ${formatRecipientSnapshot(config)}`,
-      `当前笔墨    ${getVoiceLabel(current.voice)} / ${getLengthLabel(current.length)} / ${current.htmlExport ? "HTML 开启" : "HTML 关闭"}`,
-      `情绪空气值  ${air.dot} ${air.score} / 100 · ${air.label}`,
-      `实时流      ${describeRecentFlow({isRunning, lastEvent, lastHistoryItem})}`
-    ]),
-    "",
-    drawBox("模块导航", [
-      "[R] Record    开始书写今日 / 结束并封存此刻 / 生成演示样张",
-      "[V] View      查看状态 / 翻阅往事 / 导出展示素材包 / 隐私说明",
-      "[S] Settings  修改默认设置 / 清理数据",
-      "[Q] Quit      退出"
-    ])
-  ].join("\n");
+  return drawBox("情绪仪表盘", [
+    `默认收信人  ${formatRecipientSnapshot(config)}`,
+    `当前笔墨    ${getVoiceLabel(current.voice)} / ${getLengthLabel(current.length)} / ${current.htmlExport ? "HTML 开启" : "HTML 关闭"}`,
+    `情绪空气值  ${air.dot} ${air.score} / 100 · ${air.label}`,
+    `实时流      ${describeRecentFlow({isRunning, lastEvent, lastHistoryItem})}`
+  ]);
+}
+
+export function renderSelectionMenu(title, options, selectedIndex, footer = "↑ ↓ 选择 · Enter 确认 · Esc 返回") {
+  const lines = options.map((option, index) => {
+    const marker = index === selectedIndex ? "❯" : " ";
+    const label = index === selectedIndex ? `${option.label}` : option.label;
+    const detail = option.detail ? `  ${option.detail}` : "";
+    return `${marker} ${label}${detail}`;
+  });
+
+  lines.push("");
+  lines.push(footer);
+
+  return drawBox(title, lines);
 }
 
 export async function typewriter(text, options = {}) {
@@ -232,7 +237,7 @@ export function renderLetterSummaryCard({recipient, recipientKind, voice, length
 
 export function renderPrivacyBoard() {
   return drawBox("透明化看板", [
-    "💡 你的笔迹仅保存在  ~/.emolitter/",
+    "💡 你的笔迹仅保存在  ~/.emoletter/",
     "🔐 隐私承诺  我们只记下动作轮廓和窗口标题，不记下你具体键入的内容。",
     "🪟 当前版本  监听、整理、生成都在本机完成，不会主动上传云端。"
   ]);

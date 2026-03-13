@@ -1,8 +1,8 @@
-# emolitter
+# emoletter
 
-![emolitter hero](./assets/github-hero.svg)
+![emoletter hero](./assets/github-hero.svg)
 
-`emolitter` 是一个 local-first 的创意命令行工具。
+`emoletter` 是一个 local-first 的创意命令行工具。
 
 它会把你在电脑前的一段日常动作, 整理成一封真正能读下去的信:
 不是效率报表, 不是时间追踪图, 而是一份带情绪、带停顿、带叙述感的桌面来信。
@@ -220,7 +220,7 @@ emo clear --all
 
 ## 默认配置保存
 
-`emolitter` 会把默认设置保存在本机：
+`emoletter` 会把默认设置保存在本机：
 
 - 默认收信人
 - 默认收信对象类型
@@ -233,7 +233,7 @@ emo clear --all
 配置文件位置：
 
 ```text
-~/.emolitter/config.json
+~/.emoletter/config.json
 ```
 
 ## 收信对象类型
@@ -280,7 +280,7 @@ emo clear --all
 
 ## HTML 展示页
 
-`emolitter` 现在可以把书信导出成更适合展示和截图的 HTML 页面。
+`emoletter` 现在可以把书信导出成更适合展示和截图的 HTML 页面。
 
 适用场景：
 
@@ -299,7 +299,7 @@ emo showcase
 
 ## 历史记录与输出目录
 
-- 历史记录保存在 `~/.emolitter/history.jsonl`
+- 历史记录保存在 `~/.emoletter/history.jsonl`
 - 默认输出目录可以通过菜单设置为桌面或任意自定义路径
 - `emo history` 可以快速查看最近生成的书信摘要
 
@@ -309,7 +309,7 @@ emo showcase
 
 - 监听与生成都在本机完成
 - 结果默认写到你的本地目录
-- 运行时状态写在 `~/.emolitter`
+- 运行时状态写在 `~/.emoletter`
 - 当前版本不会主动上传内容到云端
 - 终端里会明确告诉你本地保存位置和隐私边界
 
@@ -341,7 +341,19 @@ npm install -g .
 从 npm 安装：
 
 ```bash
-npm install -g emolitter
+npm install -g emoletter
+```
+
+安装后你可以继续使用短命令：
+
+```bash
+emo
+```
+
+也可以直接用完整命令名：
+
+```bash
+emoletter
 ```
 
 ## 开发

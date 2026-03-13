@@ -26,7 +26,7 @@ function buildSocialCopy(recipient, themeLabel, recipientKind, length) {
     "",
     `这次我用「${themeLabel}」主题、${getRecipientKindLabel(recipientKind)}、${getLengthLabel(length)}，把这段桌面日常写给了「${recipient}」。`,
     "",
-    "它叫 emolitter。"
+    "它叫 emoletter。"
   ].join("\n");
 }
 
@@ -73,7 +73,7 @@ function renderIndexHtml({recipient, themeLabel, generated}) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>emolitter showcase</title>
+    <title>emoletter showcase</title>
     <style>
       :root {
         color-scheme: light;
@@ -123,7 +123,7 @@ function renderIndexHtml({recipient, themeLabel, generated}) {
   <body>
     <main>
       <section class="hero">
-        <div class="eyebrow">emolitter showcase</div>
+        <div class="eyebrow">emoletter showcase</div>
         <h1>给「${recipient}」的一组桌面来信</h1>
         <p>主题：${themeLabel}。这是一组可直接用于截图、录 GIF、写 README 和发帖的展示页。</p>
       </section>
@@ -187,7 +187,7 @@ export async function createShowcaseBundle({
 
   const socialCopy = buildSocialCopy(recipient, themeLabel, recipientKind, length);
   const summary = [
-    "# emolitter Showcase Bundle",
+    "# emoletter Showcase Bundle",
     "",
     `收信人: ${recipient}`,
     `收信对象类型: ${getRecipientKindLabel(recipientKind)}`,
