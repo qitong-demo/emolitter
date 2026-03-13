@@ -63,10 +63,12 @@ export async function promptSelect(rl, title, options) {
   }
 }
 
-export async function promptHotkey(rl, title, options) {
-  console.log(tint(title, palette.lavender));
-  for (const option of options) {
-    console.log(`${tint(`[${option.key}]`, palette.amber)} ${option.label}`);
+export async function promptHotkey(rl, title, options, settings = {}) {
+  if (settings.showOptions !== false) {
+    console.log(tint(title, palette.lavender));
+    for (const option of options) {
+      console.log(`${tint(`[${option.key}]`, palette.amber)} ${option.label}`);
+    }
   }
 
   while (true) {

@@ -1,6 +1,6 @@
 {
   "name": "emolitter",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A local-first creative CLI with a Chinese menu that turns desktop activity into literary letters.",
   "type": "module",
   "bin": {

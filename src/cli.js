@@ -47,7 +47,6 @@ import {createMenuInterface, pauseMenu, promptHotkey, promptInput, promptSelect,
 import {configFile as configPath, desktopDir, historyFile as historyPath, stateDir} from "./paths.js";
 import {
   drawBox,
-  drawRule,
   palette,
   playLiteraryProgress,
   renderBrandHeader,
@@ -60,7 +59,7 @@ import {
   typewriter
 } from "./ui.js";
 
-const appVersion = "0.5.0";
+const appVersion = "0.5.1";
 const stopWaitMs = 15_000;
 
 function printHelp() {
@@ -155,15 +154,6 @@ function lastEventSnapshot() {
 
 function latestHistoryItem() {
   return loadHistorySync(1)[0] ?? null;
-}
-
-function renderModuleHint() {
-  return [
-    tint("[R] Record", palette.amber),
-    tint("[V] View", palette.lavender),
-    tint("[S] Settings", palette.sage),
-    tint("[Q] Quit", palette.mist)
-  ].join("   ");
 }
 
 function renderResultCard(result) {
@@ -480,9 +470,7 @@ function renderMenuScreen() {
       eventCount: loadEventsSync().length,
       lastEvent: lastEventSnapshot(),
       lastHistoryItem
-    }),
-    "",
-    renderModuleHint()
+    })
   ].join("\n");
 }
 
@@ -695,12 +683,13 @@ async function launchMenu() {
     while (!shouldExit) {
       console.clear();
       console.log(renderMenuScreen());
+      console.log("");
       const module = await promptHotkey(rl, "请选择模块：", [
         {key: "R", label: "Record 书写 / 封存 / 样张", value: "record"},
         {key: "V", label: "View 状态 / 历史 / 展示 / 隐私", value: "view"},
         {key: "S", label: "Settings 默认设置 / 清理", value: "settings"},
         {key: "Q", label: "Quit 退出", value: "quit"}
-      ]);
+      ], {showOptions: false});
 
       console.log("");
       if (module === "record") {
