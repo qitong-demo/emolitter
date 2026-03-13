@@ -1,7 +1,7 @@
 {
   "name": "emolitter",
-  "version": "0.2.0",
-  "description": "Turn desktop activity into playful literary letters.",
+  "version": "0.3.0",
+  "description": "A local-first creative CLI that turns desktop activity into literary letters.",
   "type": "module",
   "bin": {
     "emo": "bin/emo.js"
@@ -13,16 +13,19 @@
   ],
   "scripts": {
     "start": "node ./bin/emo.js",
-    "check": "node ./bin/emo.js --help"
+    "check": "node ./bin/emo.js --help",
+    "sample": "node ./bin/emo.js sample --stdout",
+    "showcase": "node ./bin/emo.js showcase"
   },
   "keywords": [
     "cli",
-    "emo",
     "letter",
-    "desktop",
-    "productivity"
+    "creative-tool",
+    "digital-diary",
+    "local-first",
+    "desktop"
   ],
-  "author": "",
+  "author": "qitong-demo",
   "license": "MIT",
   "engines": {
     "node": ">=20"

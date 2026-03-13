@@ -45,13 +45,15 @@ function isIgnoredWindow(currentWindow) {
   );
 }
 
-export async function spawnDetachedListener(recipient) {
+export async function spawnDetachedListener(sessionOptions) {
   await ensureStateDir();
   await cleanupRuntimeFiles();
   await clearResultFile();
 
   const entryPath = fileURLToPath(new URL("./listener-runner.js", import.meta.url));
-  const child = spawn(process.execPath, [entryPath, recipient], {
+  const recipient = sessionOptions?.recipient ?? "未署名的人";
+  const voice = sessionOptions?.voice ?? "gentle";
+  const child = spawn(process.execPath, [entryPath, recipient, voice], {
     detached: true,
     stdio: "ignore",
     windowsHide: true
@@ -59,13 +61,16 @@ export async function spawnDetachedListener(recipient) {
   child.unref();
 }
 
-export async function runListener(recipient) {
+export async function runListener(sessionOptions) {
   await ensureStateDir();
   await clearResultFile();
   const sessionId = crypto.randomUUID();
+  const recipient = sessionOptions?.recipient ?? "未署名的人";
+  const voice = sessionOptions?.voice ?? "gentle";
   await writePid(process.pid);
   await writeJson(sessionFile, {
     recipient,
+    voice,
     startedAt: new Date().toISOString(),
     sessionId
   });

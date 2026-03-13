@@ -1,0 +1,65 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="96" y1="72" x2="1172" y2="584" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4E7D3"/>
+      <stop offset="0.52" stop-color="#E7C8A0"/>
+      <stop offset="1" stop-color="#B86A47"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="231" y1="122" x2="947" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#F3EBDD"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3A241C"/>
+      <stop offset="1" stop-color="#6B3F2E"/>
+    </linearGradient>
+    <filter id="shadow" x="142" y="86" width="778" height="480" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-18" dy="22"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.330878 0 0 0 0 0.162405 0 0 0 0 0.101835 0 0 0 0.22 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" rx="36" fill="url(#bg)"/>
+  <circle cx="1124" cy="124" r="136" fill="#F8DBC0" fill-opacity="0.58"/>
+  <circle cx="173" cy="553" r="148" fill="#F9F1E6" fill-opacity="0.45"/>
+  <path d="M0 488C177 438 305 444 439 492C571 539 726 595 914 552C1074 515 1181 435 1280 378V640H0V488Z" fill="#A2563C" fill-opacity="0.20"/>
+  <path d="M0 556C151 501 298 496 463 548C649 606 861 641 1076 573C1158 547 1229 510 1280 471V640H0V556Z" fill="#7D3D2B" fill-opacity="0.17"/>
+
+  <g filter="url(#shadow)">
+    <rect x="202" y="112" width="716" height="412" rx="28" transform="rotate(-3.2 202 112)" fill="url(#panel)"/>
+    <path d="M246 166C298 153 342 159 388 176" stroke="#D9B387" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+    <path d="M258 214H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
+    <path d="M258 262H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
+    <path d="M258 310H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
+    <path d="M258 358H792" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
+    <path d="M258 406H714" stroke="#E8D6BC" stroke-width="2" opacity="0.9"/>
+    <text x="262" y="208" fill="#6F4636" font-size="22" font-family="'Georgia', 'Times New Roman', serif" letter-spacing="2">emolitter</text>
+    <text x="262" y="288" fill="url(#ink)" font-size="52" font-family="'Georgia', 'Times New Roman', serif" font-weight="700">
+      <tspan x="262" dy="0">把你一天的桌面日常</tspan>
+      <tspan x="262" dy="68">写成一封真正能读下去的信</tspan>
+    </text>
+    <text x="262" y="430" fill="#6C5446" font-size="24" font-family="'Noto Serif SC', 'Songti SC', serif">
+      <tspan x="262" dy="0">Not a time tracker.</tspan>
+      <tspan x="262" dy="38">A letter from your digital day.</tspan>
+    </text>
+  </g>
+
+  <g opacity="0.88">
+    <rect x="852" y="134" width="276" height="330" rx="20" fill="#39231D"/>
+    <rect x="876" y="160" width="228" height="24" rx="12" fill="#5D382E"/>
+    <rect x="876" y="210" width="180" height="10" rx="5" fill="#CDB9A3"/>
+    <rect x="876" y="236" width="198" height="10" rx="5" fill="#CDB9A3" opacity="0.83"/>
+    <rect x="876" y="262" width="164" height="10" rx="5" fill="#CDB9A3" opacity="0.7"/>
+    <rect x="876" y="316" width="206" height="10" rx="5" fill="#E8D8C1"/>
+    <rect x="876" y="342" width="220" height="10" rx="5" fill="#E8D8C1" opacity="0.88"/>
+    <rect x="876" y="368" width="142" height="10" rx="5" fill="#E8D8C1" opacity="0.72"/>
+    <rect x="876" y="420" width="118" height="12" rx="6" fill="#F2A15B"/>
+    <text x="876" y="522" fill="#E8D8C1" font-size="20" font-family="'IBM Plex Mono', monospace">emo sample --stdout</text>
+    <text x="876" y="552" fill="#C7B39B" font-size="16" font-family="'IBM Plex Mono', monospace">local-first / creative tool / open source</text>
+  </g>
+</svg>

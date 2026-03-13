@@ -1,0 +1,54 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="coverBg" x1="133" y1="82" x2="1457" y2="816" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F1617"/>
+      <stop offset="0.48" stop-color="#6B3F2E"/>
+      <stop offset="1" stop-color="#E0B583"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="230" y1="153" x2="1315" y2="724" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9EF"/>
+      <stop offset="1" stop-color="#F0E2CD"/>
+    </linearGradient>
+    <filter id="paperShadow" x="174" y="121" width="1150" height="648" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dx="-14" dy="18"/>
+      <feGaussianBlur stdDeviation="22"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.117647 0 0 0 0 0.0745098 0 0 0 0 0.0705882 0 0 0 0.28 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_3"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_3" result="shape"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" rx="40" fill="url(#coverBg)"/>
+  <circle cx="1328" cy="184" r="162" fill="#F3C996" fill-opacity="0.26"/>
+  <circle cx="288" cy="760" r="206" fill="#EEDCC6" fill-opacity="0.18"/>
+  <path d="M0 666C196 600 369 592 553 656C781 734 1090 809 1340 675C1431 626 1518 555 1600 478V900H0V666Z" fill="#A2563C" fill-opacity="0.22"/>
+
+  <g filter="url(#paperShadow)">
+    <rect x="214" y="147" width="1118" height="570" rx="34" transform="rotate(-2.2 214 147)" fill="url(#paper)"/>
+    <path d="M306 225H1161" stroke="#E0C29D" stroke-width="3"/>
+    <path d="M308 292H1163" stroke="#EAD8BE" stroke-width="2"/>
+    <path d="M308 350H1163" stroke="#EAD8BE" stroke-width="2"/>
+    <path d="M308 408H1163" stroke="#EAD8BE" stroke-width="2"/>
+    <path d="M308 466H1163" stroke="#EAD8BE" stroke-width="2"/>
+    <path d="M308 524H960" stroke="#EAD8BE" stroke-width="2"/>
+    <text x="306" y="215" fill="#6A4636" font-size="28" font-family="'IBM Plex Mono', monospace">emolitter / local-first creative cli</text>
+    <text x="306" y="332" fill="#33211B" font-size="68" font-family="'Georgia', 'Times New Roman', serif" font-weight="700">
+      <tspan x="306" dy="0">A letter from</tspan>
+      <tspan x="306" dy="82">your digital day</tspan>
+    </text>
+    <text x="308" y="514" fill="#6F5546" font-size="28" font-family="'Noto Serif SC', 'Songti SC', serif">
+      <tspan x="308" dy="0">不是效率看板, 不是时间追踪图</tspan>
+      <tspan x="308" dy="42">而是一封把普通电脑生活重新写得像作品的信</tspan>
+    </text>
+  </g>
+
+  <g opacity="0.95">
+    <rect x="1080" y="566" width="310" height="166" rx="24" fill="#24191A"/>
+    <text x="1110" y="620" fill="#F8E8D6" font-size="26" font-family="'IBM Plex Mono', monospace">$ emo showcase</text>
+    <text x="1110" y="662" fill="#C9B29D" font-size="18" font-family="'IBM Plex Mono', monospace">3 letters</text>
+    <text x="1110" y="692" fill="#C9B29D" font-size="18" font-family="'IBM Plex Mono', monospace">cover titles</text>
+    <text x="1110" y="722" fill="#C9B29D" font-size="18" font-family="'IBM Plex Mono', monospace">social copy</text>
+  </g>
+</svg>
