@@ -4,18 +4,17 @@ import crypto from "node:crypto";
 import {fileURLToPath} from "node:url";
 import {activeWindow} from "get-windows";
 import {GlobalKeyboardListener} from "node-global-key-listener";
-import {finalizeLetter} from "./letter.js";
+import {finalizeLetter, normalizeSession} from "./letter.js";
 import {describeKeyEvent, describeWindow} from "./poetry.js";
 import {
   appendEvent,
   cleanupRuntimeFiles,
   clearResultFile,
   ensureStateDir,
-  pidFile,
   readJsonSync,
+  replaceSession,
   sessionFile,
   stopFile,
-  writeJson,
   writePid
 } from "./state.js";
 
@@ -51,9 +50,8 @@ export async function spawnDetachedListener(sessionOptions) {
   await clearResultFile();
 
   const entryPath = fileURLToPath(new URL("./listener-runner.js", import.meta.url));
-  const recipient = sessionOptions?.recipient ?? "未署名的人";
-  const voice = sessionOptions?.voice ?? "gentle";
-  const child = spawn(process.execPath, [entryPath, recipient, voice], {
+  const payload = JSON.stringify(normalizeSession(sessionOptions));
+  const child = spawn(process.execPath, [entryPath, payload], {
     detached: true,
     stdio: "ignore",
     windowsHide: true
@@ -65,16 +63,15 @@ export async function runListener(sessionOptions) {
   await ensureStateDir();
   await clearResultFile();
   const sessionId = crypto.randomUUID();
-  const recipient = sessionOptions?.recipient ?? "未署名的人";
-  const voice = sessionOptions?.voice ?? "gentle";
+  const safeSession = normalizeSession(sessionOptions);
+
   await writePid(process.pid);
-  await writeJson(sessionFile, {
-    recipient,
-    voice,
+  await replaceSession({
+    ...safeSession,
     startedAt: new Date().toISOString(),
     sessionId
   });
-  await appendEvent(`你铺开了一张看不见的信纸，决定把今天写给「${recipient}」。`);
+  await appendEvent(`你铺开了一张看不见的信纸，决定把今天写给「${safeSession.recipient}」。`);
 
   const keyboard = new GlobalKeyboardListener();
   let closed = false;

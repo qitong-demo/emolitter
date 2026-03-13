@@ -20,7 +20,7 @@
 ### 镜头 1 / 0-2 秒
 
 - 画面: 终端空白, 光标闪动
-- 操作: 输入 `emo showcase --to "小王" --theme midnight`
+- 操作: 输入 `emo showcase --to "小王" --kind someone --length standard --theme midnight`
 - 画面文案: `A letter from your digital day`
 
 ### 镜头 2 / 2-4 秒
@@ -39,7 +39,7 @@
 
 ### 镜头 3 / 4-7 秒
 
-- 画面: 打开 `cinematic-midnight.txt`
+- 画面: 先快速打开 `index.html`, 再切到 `cinematic-midnight.html`
 - 建议停在以下几句:
 
 ```text

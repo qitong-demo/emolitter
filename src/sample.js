@@ -55,14 +55,26 @@ export function getSampleThemeLabel(theme) {
   return sampleThemes[theme]?.label ?? sampleThemes.maker.label;
 }
 
-export function createSampleSession({recipient = "未来的我", voice = "gentle", theme = "maker"} = {}) {
+export function createSampleSession({
+  recipient = "未来的我",
+  recipientKind = "future",
+  voice = "gentle",
+  length = "standard",
+  theme = "maker",
+  outputDir,
+  htmlExport = false
+} = {}) {
   const selectedTheme = sampleThemes[theme] ?? sampleThemes.maker;
   const startedAt = new Date();
   startedAt.setHours(selectedTheme.startHour, 0, 0, 0);
 
   return {
     recipient,
+    recipientKind,
     voice,
+    length,
+    outputDir,
+    htmlExport,
     startedAt: startedAt.toISOString()
   };
 }

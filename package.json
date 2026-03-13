@@ -1,7 +1,7 @@
 {
   "name": "emolitter",
-  "version": "0.3.0",
-  "description": "A local-first creative CLI that turns desktop activity into literary letters.",
+  "version": "0.4.0",
+  "description": "A local-first creative CLI with a Chinese menu that turns desktop activity into literary letters.",
   "type": "module",
   "bin": {
     "emo": "bin/emo.js"
@@ -15,7 +15,8 @@
     "start": "node ./bin/emo.js",
     "check": "node ./bin/emo.js --help",
     "sample": "node ./bin/emo.js sample --stdout",
-    "showcase": "node ./bin/emo.js showcase"
+    "showcase": "node ./bin/emo.js showcase",
+    "menu": "node ./bin/emo.js"
   },
   "keywords": [
     "cli",
@@ -23,7 +24,8 @@
     "creative-tool",
     "digital-diary",
     "local-first",
-    "desktop"
+    "desktop",
+    "chinese-cli"
   ],
   "author": "qitong-demo",
   "license": "MIT",

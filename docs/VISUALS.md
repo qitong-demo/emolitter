@@ -84,11 +84,12 @@
 
 最短版本:
 
-1. 终端输入 `emo showcase --to "小王" --theme midnight`
+1. 终端输入 `emo showcase --to "小王" --kind someone --length standard --theme midnight`
 2. 输出 bundle 已生成
-3. 打开 cinematic 样张开头
-4. 停在最有镜头感的一段
-5. 收尾到 `此致 敬礼`
+3. 打开 `index.html` 总览页
+4. 打开 cinematic 样张开头
+5. 停在最有镜头感的一段
+6. 收尾到 `此致 敬礼`
 
 ## 视觉使用建议
 

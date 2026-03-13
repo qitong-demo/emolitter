@@ -50,12 +50,14 @@ Not a time tracker. A letter from your digital day.
 如果你不想手工准备素材, 可以直接运行:
 
 ```bash
-emo showcase --to "小王" --theme midnight
+emo showcase --to "小王" --kind someone --length standard --theme midnight
 ```
 
 它会生成一个本地展示包, 默认包含:
 
 - 3 封不同风格的样张信
+- 3 个 HTML 展示页
+- 1 个 `index.html` 总览页
 - README 可引用摘录
 - 封面标题候选
 - 社交发帖文案

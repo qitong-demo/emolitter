@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import fsp from "node:fs/promises";
 import os from "node:os";
-import path from "node:path";
 import {execFile} from "node:child_process";
 import {promisify} from "node:util";
 import {
+  configFile,
   eventsFile,
+  historyFile,
   pidFile,
   resultFile,
   sessionFile,
@@ -75,12 +76,21 @@ export async function appendEvent(message, timestamp = new Date()) {
 }
 
 export function loadEventsSync() {
-  if (!fs.existsSync(eventsFile)) {
+  return readJsonLinesSync(eventsFile);
+}
+
+export async function appendJsonLine(filePath, value) {
+  await ensureStateDir();
+  await fsp.appendFile(filePath, `${JSON.stringify(value)}${os.EOL}`, "utf8");
+}
+
+export function readJsonLinesSync(filePath) {
+  if (!fs.existsSync(filePath)) {
     return [];
   }
 
   return fs
-    .readFileSync(eventsFile, "utf8")
+    .readFileSync(filePath, "utf8")
     .split(/\r?\n/u)
     .filter(Boolean)
     .map((line) => {
@@ -91,6 +101,47 @@ export function loadEventsSync() {
       }
     })
     .filter(Boolean);
+}
+
+export async function replaceSession(value) {
+  if (!value) {
+    if (fs.existsSync(sessionFile)) {
+      await fsp.rm(sessionFile, {force: true});
+    }
+    return;
+  }
+
+  await writeJson(sessionFile, value);
+}
+
+export async function updateSession(mutator) {
+  const current = readJsonSync(sessionFile);
+  if (!current) {
+    return null;
+  }
+
+  const next = await mutator({...current});
+  if (!next) {
+    return current;
+  }
+
+  await writeJson(sessionFile, next);
+  return next;
+}
+
+export async function clearPersistentFiles(options = {}) {
+  const shouldClearConfig = Boolean(options.config);
+  const shouldClearHistory = Boolean(options.history);
+
+  for (const filePath of [
+    resultFile,
+    ...(shouldClearConfig ? [configFile] : []),
+    ...(shouldClearHistory ? [historyFile] : [])
+  ]) {
+    if (fs.existsSync(filePath)) {
+      await fsp.rm(filePath, {force: true});
+    }
+  }
 }
 
 export async function isProcessRunning(pid) {
@@ -139,7 +190,9 @@ export async function waitForListenerToStop(pid, timeoutMs) {
 }
 
 export {
+  configFile,
   eventsFile,
+  historyFile,
   pidFile,
   resultFile,
   sessionFile,

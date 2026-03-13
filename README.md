@@ -7,11 +7,13 @@
 它会把你在电脑前的一段日常动作, 整理成一封真正能读下去的信:
 不是效率报表, 不是时间追踪图, 而是一份带情绪、带停顿、带叙述感的桌面来信。
 
-这个项目更适合被理解为:
+现在它已经不只是一个命令行玩具, 而是一个更完整的中文创意工具:
 
-- 一个创意工具
-- 一个开源小作品
-- 一个关于数字日常、情绪记录和个人表达的实验
+- 直接输入 `emo` 就能进入中文菜单
+- 支持默认配置保存
+- 支持收信对象类型、风格、篇幅细分
+- 支持历史记录、隐私说明、清理命令
+- 支持 HTML 展示页和展示素材包导出
 
 ## 一句话理解它
 
@@ -49,84 +51,260 @@
 
 完整样张见 [examples/minimal-office.txt](./examples/minimal-office.txt)
 
-## 它适合谁
+## 最推荐的使用方式
 
-- 想把普通电脑日常写成有情绪的文字的人
-- 想做一件有记忆点的开源作品的人
-- 想给自己、给朋友、给未来留下一封数字书信的人
-- 想做 demo、录视频、发 GitHub / 小红书 / B 站内容的人
-
-## 它不是什么
-
-- 它不是时间管理 SaaS
-- 它不是严格意义上的效率追踪器
-- 它不是屏幕历史搜索工具
-
-`emolitter` 的价值不在统计, 而在表达。
-
-## 现在的能力
-
-- `emo open` 启动后台监听
-- `emo close` 结束记录, 生成书信
-- `emo status` 查看当前记录状态
-- `emo sample` 直接生成一封演示样张, 不需要先开权限
-- `emo showcase` 一键导出展示素材包
-- 支持不同书信风格: `gentle` / `cinematic` / `minimal`
-- 输出会尽量整理成段落, 而不是日志式逐条回放
-- 结果默认保存到桌面, 便于截图、分享和二次编辑
-
-## 安装
-
-本地开发:
+### 1. 直接进入中文菜单
 
 ```bash
-npm install
-npm install -g .
+emo
 ```
 
-如果已经发布到 npm:
+适合第一次使用。
+
+菜单里可以直接完成：
+
+- 开始记录今天
+- 结束记录并生成书信
+- 生成演示样张
+- 导出展示素材包
+- 修改默认设置
+- 查看历史记录
+- 查看隐私说明
+- 清理数据
+
+### 2. 一条命令快速开始
 
 ```bash
-npm install -g emolitter
+emo open --to "未来的我" --kind future --voice gentle --length standard
 ```
 
-## 快速开始
-
-开始记录:
-
-```bash
-emo open --to "未来的我" --voice gentle
-```
-
-结束并生成书信:
-
-```bash
-emo close
-```
-
-在终端直接查看成品:
+结束并生成：
 
 ```bash
 emo close --stdout
 ```
 
-查看当前状态:
+如果你还想同时导出 HTML 展示页：
+
+```bash
+emo close --html --stdout
+```
+
+### 3. 不开监听, 先看效果
+
+```bash
+emo sample --to "小王" --kind someone --voice cinematic --length long --theme midnight --stdout --html
+```
+
+### 4. 一键导出展示素材包
+
+```bash
+emo showcase --to "未来的我" --kind future --length standard --theme maker
+```
+
+它会生成：
+
+- 3 封不同 voice 的样张信
+- 3 个 HTML 展示页
+- 1 个 index.html 总览页
+- README 可引用摘录
+- 封面标题候选
+- 社交发帖文案
+
+## 功能一览
+
+- `emo` 中文菜单主入口
+- `emo open` 启动后台监听
+- `emo close` 结束记录并生成书信
+- `emo status` 查看当前记录状态
+- `emo history` 查看最近生成记录
+- `emo sample` 直接生成演示样张
+- `emo showcase` 一键导出展示素材包
+- `emo settings` 查看或重置默认设置
+- `emo privacy` 查看隐私说明
+- `emo clear` 清理运行时数据、历史记录或默认配置
+
+## 命令说明
+
+### `emo`
+
+进入中文菜单。
+
+```bash
+emo
+```
+
+### `emo open`
+
+启动后台监听。
+
+```bash
+emo open [--to 收信人] [--kind someone|self|future] [--voice gentle|cinematic|minimal] [--length short|standard|long] [--html] [--outdir 目录]
+```
+
+### `emo close`
+
+停止监听并生成书信。
+
+```bash
+emo close [--stdout] [--html]
+```
+
+### `emo status`
+
+查看当前记录状态。
 
 ```bash
 emo status
 ```
 
-不用开监听, 直接生成演示样张:
+### `emo history`
+
+查看最近生成的书信记录。
 
 ```bash
-emo sample --to "小王" --voice cinematic --theme midnight --stdout
+emo history [--limit 数量]
 ```
 
-一键导出展示素材包:
+### `emo sample`
+
+直接生成一封演示样张, 适合做截图、录屏、展示 README 或社交媒体内容。
 
 ```bash
-emo showcase --to "小王" --theme midnight
+emo sample [--to 收信人] [--kind someone|self|future] [--voice gentle|cinematic|minimal] [--length short|standard|long] [--theme maker|office|midnight] [--stdout] [--html]
 ```
+
+### `emo showcase`
+
+一次性导出适合 GitHub 首页、截图、发帖和录 GIF 的展示包。
+
+```bash
+emo showcase [--to 收信人] [--kind someone|self|future] [--length short|standard|long] [--theme maker|office|midnight] [--dir 输出目录]
+```
+
+### `emo settings`
+
+查看当前默认配置, 或恢复为初始值。
+
+```bash
+emo settings
+emo settings --reset
+```
+
+### `emo privacy`
+
+查看隐私说明与本地文件位置。
+
+```bash
+emo privacy
+```
+
+### `emo clear`
+
+清理运行时数据、历史或配置。
+
+```bash
+emo clear
+emo clear --history
+emo clear --config
+emo clear --all
+```
+
+## 默认配置保存
+
+`emolitter` 会把默认设置保存在本机：
+
+- 默认收信人
+- 默认收信对象类型
+- 默认风格
+- 默认篇幅
+- 默认样张主题
+- 默认输出目录
+- 是否默认导出 HTML
+
+配置文件位置：
+
+```text
+~/.emolitter/config.json
+```
+
+## 收信对象类型
+
+### `someone`
+
+写给某个人。更像一封真正寄给他人的信。
+
+### `self`
+
+写给自己。更像日记或回信。
+
+### `future`
+
+写给未来。更像数字时刻胶囊。
+
+## 书信风格
+
+### `gentle`
+
+默认风格。更柔和, 更像日常来信。
+
+### `cinematic`
+
+更适合展示和传播。镜头感更强, 适合深夜项目和短视频文案。
+
+### `minimal`
+
+更克制, 更像简短但有质感的数字日记。
+
+## 篇幅
+
+### `short`
+
+短笺。更轻, 更快, 适合做分享摘录。
+
+### `standard`
+
+标准。平衡可读性和完整性。
+
+### `long`
+
+长信。会保留更多片段, 更适合沉浸式阅读。
+
+## HTML 展示页
+
+`emolitter` 现在可以把书信导出成更适合展示和截图的 HTML 页面。
+
+适用场景：
+
+- 给朋友分享
+- 做 GitHub README 演示
+- 做录屏素材
+- 做社媒截图
+
+可以通过以下方式导出：
+
+```bash
+emo close --html
+emo sample --html
+emo showcase
+```
+
+## 历史记录与输出目录
+
+- 历史记录保存在 `~/.emolitter/history.jsonl`
+- 默认输出目录可以通过菜单设置为桌面或任意自定义路径
+- `emo history` 可以快速查看最近生成的书信摘要
+
+## 隐私说明
+
+这是一个 local-first 工具：
+
+- 监听与生成都在本机完成
+- 结果默认写到你的本地目录
+- 运行时状态写在 `~/.emolitter`
+- 当前版本不会主动上传内容到云端
+
+即便如此, 你仍然应该只在自己信任的环境里使用它。
 
 ## 演示素材
 
@@ -140,148 +318,48 @@ emo showcase --to "小王" --theme midnight
 - 深夜项目主题样张: [examples/cinematic-midnight.txt](./examples/cinematic-midnight.txt)
 - 克制风格样张: [examples/minimal-office.txt](./examples/minimal-office.txt)
 
-## 命令说明
+## 安装
 
-### `emo open`
-
-启动后台监听。
+本地开发：
 
 ```bash
-emo open [--to 收信人] [--voice gentle|cinematic|minimal]
+npm install
+npm install -g .
 ```
 
-示例:
+从 npm 安装：
 
 ```bash
-emo open --to "未来的我" --voice cinematic
+npm install -g emolitter
 ```
-
-### `emo close`
-
-停止监听并生成书信。
-
-```bash
-emo close [--stdout]
-```
-
-### `emo status`
-
-查看当前是否正在记录、收信人是谁、用了什么风格、已经收集了多少事件。
-
-```bash
-emo status
-```
-
-### `emo sample`
-
-直接生成一封演示样张, 适合做截图、录屏、展示 README 或社交媒体内容。
-
-```bash
-emo sample [--to 收信人] [--voice gentle|cinematic|minimal] [--theme maker|office|midnight] [--stdout]
-```
-
-示例:
-
-```bash
-emo sample --to "朋友" --voice minimal --theme office
-```
-
-### `emo showcase`
-
-一次性导出适合 GitHub 首页、截图和发帖的展示包。
-
-```bash
-emo showcase [--to 收信人] [--theme maker|office|midnight] [--dir 输出目录]
-```
-
-导出的 bundle 默认包含:
-
-- 3 封不同 voice 的样张信
-- 1 份首页可引用摘录
-- 1 份封面标题候选
-- 1 份社交发布文案
-- 1 份展示总览说明
-
-## 书信风格
-
-### `gentle`
-
-默认风格。更柔和, 更像写给某个人的日常来信。
-
-### `cinematic`
-
-更适合做展示和传播。语气更有镜头感, 适合深夜项目、创作者主题、短视频文案。
-
-### `minimal`
-
-更克制, 更像简短但有质感的日记。
-
-## 样张主题
-
-### `maker`
-
-创作者 / 开发者的一天。
-
-### `office`
-
-普通工作日的桌面片段。
-
-### `midnight`
-
-深夜项目、赶工、独处感更强的场景。
-
-## 输出结果
-
-- 文件默认保存在桌面
-- 文件名格式大致为: `致_收信人_日期_总结.txt`
-- 样张文件会用 `样张_...txt` 前缀
-- 终端预览可以用 `--stdout`
-
-## 平台与权限
-
-- Windows、macOS、Linux 都可以运行
-- macOS 通常需要辅助功能权限
-- Linux 下窗口监听依赖桌面环境, Wayland 支持有限
-- 全局键盘监听可能会被系统安全策略、杀毒软件或权限设置拦截
-
-如果你只是想先看效果, 建议先用:
-
-```bash
-emo sample --stdout
-```
-
-## 隐私说明
-
-这是一个 local-first 工具:
-
-- 监听与生成都在本机完成
-- 结果默认写到你的桌面
-- 运行时状态写在 `~/.emolitter`
-- 当前版本不会主动上传内容到云端
-
-即便如此, 你仍然应该只在自己信任的环境里使用它。
 
 ## 开发
 
-查看帮助:
+查看帮助：
 
 ```bash
 npm run check
 ```
 
-快速生成一个样张:
+快速打开菜单：
+
+```bash
+npm run menu
+```
+
+快速生成一个样张：
 
 ```bash
 npm run sample
 ```
 
-快速导出展示包:
+快速导出展示包：
 
 ```bash
 npm run showcase
 ```
 
-本地打包:
+本地打包：
 
 ```bash
 npm pack
@@ -291,10 +369,10 @@ npm pack
 
 我不太想再做一个“告诉你今天有多高效”的工具。
 
-我更想做一个能把普通数字生活重新写得像作品的东西:
+我更想做一个能把普通数字生活重新写得像作品的东西：
 让窗口切换、键盘敲击、犹豫、停顿和深夜里的小动作, 都有机会被整理成一封信。
 
-如果它刚好让你觉得:
+如果它刚好让你觉得：
 
 - “今天也许并不值得统计, 但值得写下来”
 - “原来普通的电脑日常也能有一点文学感”

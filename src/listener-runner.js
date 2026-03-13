@@ -1,9 +1,26 @@
 import {runListener} from "./listener.js";
 
-const recipient = process.argv[2] || "未署名的人";
-const voice = process.argv[3] || "gentle";
+function parseSessionPayload(rawValue) {
+  if (!rawValue) {
+    return null;
+  }
 
-await runListener({recipient, voice});
+  try {
+    return JSON.parse(rawValue);
+  } catch {
+    return null;
+  }
+}
+
+const sessionOptions = parseSessionPayload(process.argv[2]) ?? {
+  recipient: "未署名的人",
+  recipientKind: "someone",
+  voice: "gentle",
+  length: "standard",
+  htmlExport: false
+};
+
+await runListener(sessionOptions);
 
 // Keep the process alive for timers and keyboard hooks.
 setInterval(() => {}, 1 << 30);
