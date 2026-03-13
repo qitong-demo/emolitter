@@ -21,6 +21,18 @@ const specialKeyMap = new Map([
   ["RIGHT META", "你按住了系统键，像想把现实也调成快捷操作。"]
 ]);
 
+function describeGenericStroke(keyName) {
+  if (/^[0-9]$/u.test(keyName)) {
+    return "你轻轻敲下一枚数字，让某个念头暂时有了刻度。";
+  }
+
+  if (/^[a-z]$/iu.test(keyName)) {
+    return "你轻轻敲下一枚字母，像替沉默添了一笔旁白。";
+  }
+
+  return `你按下了「${keyName}」，像把一小段情绪交给了键盘保管。`;
+}
+
 export function describeKeyEvent(event) {
   const keyName = String(event.name ?? "").trim();
   if (!keyName) {
@@ -36,11 +48,7 @@ export function describeKeyEvent(event) {
     return specialKeyMap.get(upperName);
   }
 
-  if (upperName.length === 1) {
-    return `你轻轻敲下「${keyName.toLowerCase()}」，仿佛在替沉默添一笔旁白。`;
-  }
-
-  return `你按下了「${keyName}」，像把一小段情绪交给了键盘保管。`;
+  return describeGenericStroke(keyName);
 }
 
 export function describeWindow(title, appName) {

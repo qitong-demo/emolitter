@@ -1,4 +1,5 @@
 import path from "node:path";
+import {getLengthLabel, getRecipientKindLabel, getVoiceLabel} from "./letter.js";
 import {historyFile} from "./paths.js";
 import {appendJsonLine, readJsonLinesSync} from "./state.js";
 
@@ -32,7 +33,7 @@ export function describeHistoryItem(item, index) {
   const sourceLabel = item.source === "sample" ? "样张" : item.source === "live" ? "正式书信" : "书信";
   return [
     `${index + 1}. ${item.generatedAt ?? item.startedAt ?? "未知时间"}`,
-    `   类型：${sourceLabel} | 收信人：${item.recipient} | 对象：${item.recipientKind ?? "someone"} | 风格：${item.voice ?? "gentle"} | 篇幅：${item.length ?? "standard"}`,
+    `   类型：${sourceLabel} | 收信人：${item.recipient} | 对象：${getRecipientKindLabel(item.recipientKind ?? "someone")} | 风格：${getVoiceLabel(item.voice ?? "gentle")} | 篇幅：${getLengthLabel(item.length ?? "standard")}`,
     `   文件：${output}`,
     item.summary ? `   摘要：${item.summary}` : null
   ]

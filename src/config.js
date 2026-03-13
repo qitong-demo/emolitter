@@ -1,5 +1,7 @@
 import path from "node:path";
 import {configFile, desktopDir} from "./paths.js";
+import {getLengthLabel, getRecipientKindLabel, getVoiceLabel} from "./letter.js";
+import {getSampleThemeLabel} from "./sample.js";
 import {readJsonSync, writeJson} from "./state.js";
 
 export const defaultConfig = {
@@ -45,10 +47,10 @@ export async function resetConfig() {
 export function describeConfig(config = readConfigSync()) {
   return [
     `默认收信对象：${config.recipient}`,
-    `收信对象类型：${config.recipientKind}`,
-    `默认风格：${config.voice}`,
-    `默认篇幅：${config.length}`,
-    `默认样张主题：${config.theme}`,
+    `收信对象类型：${getRecipientKindLabel(config.recipientKind)}`,
+    `默认风格：${getVoiceLabel(config.voice)}`,
+    `默认篇幅：${getLengthLabel(config.length)}`,
+    `默认样张主题：${getSampleThemeLabel(config.theme)}`,
     `默认输出目录：${config.outputDir}`,
     `默认导出 HTML：${config.htmlExport ? "是" : "否"}`
   ].join("\n");
